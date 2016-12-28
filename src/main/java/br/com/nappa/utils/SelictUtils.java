@@ -6,8 +6,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
-import br.com.nappa.logic.Selic;
+import br.com.nappa.model.Selic;
 
 public class SelictUtils {
 
@@ -19,7 +18,7 @@ public class SelictUtils {
 
 		try {
 			br = new BufferedReader(new FileReader("selic.csv"));
-			while ((linha = br.readLine()) != null) {							
+			while ((linha = br.readLine()) != null) {
 				buildSelic(linha.split(";"));
 			}
 			br.close();
@@ -29,27 +28,27 @@ public class SelictUtils {
 
 	}
 
-	private static void buildSelic(String [] values) {				
+	private static void buildSelic(String[] values) {
 		String dataInicial = values[3].substring(0, 10);
 		String dataFinal = null;
-		BigDecimal taxa = new BigDecimal(values[4].replaceAll(",", "."));		
-		if(values[3].length() > 13)
-		dataFinal = values[3].substring(13);		
+		BigDecimal taxa = new BigDecimal(values[4].replaceAll(",", "."));
+		if (values[3].length() > 13)
+			dataFinal = values[3].substring(13);
 		selicHistory.add(new Selic(dataInicial, dataFinal, taxa));
 	}
-	
-	public static List<Selic> getHistory(){
+
+	public static List<Selic> getHistory() {
 		return selicHistory;
 	}
-	
-	public static BigDecimal getTaxaDoDia(LocalDate date){
-		for (Selic selic : getHistory()){
-			if (selic.getInicio().isBefore(date) && (selic.getFim() == null ||selic.getFim().isAfter(date))){
+
+	public static BigDecimal getTaxaDoDia(LocalDate date) {
+		for (Selic selic : getHistory()) {
+			if ((selic.getInicio().isBefore(date) || selic.getInicio().isEqual(date))
+					&& (selic.getFim() == null || selic.getFim().isAfter(date) || selic.getFim().isEqual(date))) {
 				return selic.getTaxa();
 			}
-		}		
+		}
 		return BigDecimal.ONE;
 	}
-	
-	
+
 }

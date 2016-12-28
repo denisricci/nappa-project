@@ -1,4 +1,4 @@
-package br.com.nappa.logic;
+package br.com.nappa.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

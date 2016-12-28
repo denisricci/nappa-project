@@ -18,11 +18,11 @@ public class SelicUtilsTest {
 		BigDecimal selic5 = SelictUtils.getTaxaDoDia(LocalDate.of(2004, 1, 21));
 		BigDecimal selic6 = SelictUtils.getTaxaDoDia(LocalDate.of(1996, 8, 21));
 		Assert.assertEquals(new BigDecimal("13.75"), selic1);
-		Assert.assertEquals(new BigDecimal("14.75"), selic2);
-		Assert.assertEquals(new BigDecimal("11.75"), selic3);
-		Assert.assertEquals(new BigDecimal("8"), selic4);
+		Assert.assertEquals(new BigDecimal("13.75"), selic2);
+		Assert.assertEquals(new BigDecimal("11.25"), selic3);
+		Assert.assertEquals(new BigDecimal("7.5"), selic4);
 		Assert.assertEquals(new BigDecimal("16.5"),selic5);
-		Assert.assertEquals(new BigDecimal("1.88"),selic6);
+		Assert.assertEquals(new BigDecimal("1.9"),selic6);
 	}
 	
 }
