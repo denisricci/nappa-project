@@ -1,6 +1,6 @@
 package br.com.nappa.converter;
 
-public class TaxaDeJuros  {
+public class TaxaDeJurosConverter  {
 	
 	public static double paraMensal(double taxaAnual){				
 		return (Math.pow((taxaAnual/100)+1,1d/12d)-1) * 100;
