@@ -6,6 +6,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import br.com.nappa.model.Selic;
 
 public class SelictUtils {
@@ -29,26 +31,14 @@ public class SelictUtils {
 	}
 
 	private static void buildSelic(String[] values) {
-		String dataInicial = values[3].substring(0, 10);
-		String dataFinal = null;
-		BigDecimal taxa = new BigDecimal(values[4].replaceAll(",", "."));
-		if (values[3].length() > 13)
-			dataFinal = values[3].substring(13);
-		selicHistory.add(new Selic(dataInicial, dataFinal, taxa));
+		String data = values[0];		
+		BigDecimal taxaAoAno = new BigDecimal(values[1].replaceAll(",", "."));
+		BigDecimal fatorDiario = new BigDecimal(values[2].replaceAll(",", "."));
+		selicHistory.add(new Selic(data, taxaAoAno, fatorDiario));
 	}
 
-	public static List<Selic> getHistory() {
-		return selicHistory;
-	}
-
-	public static BigDecimal getTaxaDoDia(LocalDate date) {
-		for (Selic selic : getHistory()) {
-			if ((selic.getInicio().isBefore(date) || selic.getInicio().isEqual(date))
-					&& (selic.getFim() == null || selic.getFim().isAfter(date) || selic.getFim().isEqual(date))) {
-				return selic.getTaxa();
-			}
-		}
-		return BigDecimal.ONE;
+	public static Optional<Selic> getSelic(LocalDate data) {
+		return selicHistory.stream().filter(t -> t.getDate().isEqual(data)).findFirst();
 	}
 
 }
