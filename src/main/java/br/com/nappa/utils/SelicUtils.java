@@ -10,7 +10,7 @@ import java.util.Optional;
 
 import br.com.nappa.model.Selic;
 
-public class SelictUtils {
+public class SelicUtils {
 
 	private static List<Selic> selicHistory = new ArrayList<>();
 
@@ -31,7 +31,7 @@ public class SelictUtils {
 	}
 
 	private static void buildSelic(String[] values) {
-		String data = values[0];		
+		String data = values[0];
 		BigDecimal taxaAoAno = new BigDecimal(values[1].replaceAll(",", "."));
 		BigDecimal fatorDiario = new BigDecimal(values[2].replaceAll(",", "."));
 		selicHistory.add(new Selic(data, taxaAoAno, fatorDiario));
