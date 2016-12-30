@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Optional;
 
-import br.com.nappa.converter.SelicConverter;
+import br.com.nappa.logic.CertificadoDepositoBancario;
 import br.com.nappa.model.Selic;
 import br.com.nappa.utils.SelicUtils;
 
@@ -14,24 +14,20 @@ import br.com.nappa.utils.SelicUtils;
  *
  */
 public class App {
-	
-	
+
 	public static void main(String[] args) throws IOException {
-		LocalDate currentDate = LocalDate.of(2016, 02, 18);
+		LocalDate currentDate = LocalDate.of(2015, 7, 13);
 		LocalDate today = LocalDate.now();
 		BigDecimal amount = new BigDecimal(50000);
-		
-		while(!currentDate.isEqual(today)){
+		CertificadoDepositoBancario cdb = new CertificadoDepositoBancario(new BigDecimal(0.95d));
+		do {
+			currentDate = currentDate.plusDays(1);
 			Optional<Selic> selic = SelicUtils.getSelic(currentDate);
-			
-			if(selic.isPresent()){				
-				BigDecimal fatorDiario = selic.get().getFatorDiario().subtract(BigDecimal.ONE);
-				fatorDiario = fatorDiario.multiply(new BigDecimal(0.85d)).add(BigDecimal.ONE);				
-				amount = amount.multiply(fatorDiario);
-				System.out.println(currentDate + "(" + currentDate.getDayOfWeek() +")" + " - " + String.format("%.8f", fatorDiario) + " - " + String.format("%.2f", amount));
+			if (selic.isPresent()) {
+				amount = cdb.calculoDiario(amount, selic.get().getFatorDiario());
 			}
-			currentDate=currentDate.plusDays(1);
-		}
-				
+			currentDate = currentDate.plusDays(1);
+		} while ((!currentDate.isEqual(today)));
+		System.out.println(String.format("%.8f", amount));
 	}
 }
