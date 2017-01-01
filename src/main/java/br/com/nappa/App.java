@@ -3,11 +3,12 @@ package br.com.nappa;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Optional;
 
-import br.com.nappa.logic.CertificadoDepositoBancario;
-import br.com.nappa.model.Selic;
-import br.com.nappa.utils.SelicUtils;
+import br.com.nappa.logic.CalculadoraInvestimento;
+import br.com.nappa.logic.Investimento;
+import br.com.nappa.logic.impl.CalculadoraInvestimentoDefault;
+import br.com.nappa.logic.impl.CertificadoDepositoBancario;
+import br.com.nappa.logic.impl.TesouroSelic;
 
 /**
  * Hello world!
@@ -16,18 +17,14 @@ import br.com.nappa.utils.SelicUtils;
 public class App {
 
 	public static void main(String[] args) throws IOException {
-		LocalDate currentDate = LocalDate.of(2015, 7, 13);
-		LocalDate today = LocalDate.now();
-		BigDecimal amount = new BigDecimal(50000);
-		CertificadoDepositoBancario cdb = new CertificadoDepositoBancario(new BigDecimal(0.95d));
-		do {
-			currentDate = currentDate.plusDays(1);
-			Optional<Selic> selic = SelicUtils.getSelic(currentDate);
-			if (selic.isPresent()) {
-				amount = cdb.calculoDiario(amount, selic.get().getFatorDiario());
-			}
-			currentDate = currentDate.plusDays(1);
-		} while ((!currentDate.isEqual(today)));
-		System.out.println(String.format("%.8f", amount));
+		CertificadoDepositoBancario cdb = new CertificadoDepositoBancario(new BigDecimal(50000),
+				LocalDate.of(2015, 7, 13), LocalDate.now(), new BigDecimal(0.95d));
+		CalculadoraInvestimento calculadora = new CalculadoraInvestimentoDefault();
+		System.out.println(calculadora.calculaInvestimento(cdb));
+
+		Investimento tesouroSelic = new TesouroSelic(new BigDecimal(19963.72), LocalDate.of(2016, 2, 18),
+				LocalDate.now(), new BigDecimal(0.001));	
+		System.out.println(calculadora.calculaInvestimento(tesouroSelic));
+
 	}
 }

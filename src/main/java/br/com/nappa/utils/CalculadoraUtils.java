@@ -5,10 +5,8 @@ import java.math.BigDecimal;
 public class CalculadoraUtils {
 
 	public static BigDecimal porcentagemDo(BigDecimal fatorDiario, BigDecimal porcentagem) {
-		BigDecimal result = fatorDiario.subtract(BigDecimal.ONE);
-		result = result.multiply(porcentagem).add(BigDecimal.ONE);
-		System.out.println(result);
-		return result;
+		BigDecimal result = fatorDiario.subtract(BigDecimal.ONE);			
+		return result.multiply(porcentagem).add(BigDecimal.ONE);
 	}
 
 }

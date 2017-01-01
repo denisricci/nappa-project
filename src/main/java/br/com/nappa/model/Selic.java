@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Selic {
+public class Selic implements IndiceEconomico{
 	
 	private LocalDate date;
 	private BigDecimal taxaAoAno;
