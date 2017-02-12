@@ -1,24 +1,25 @@
-package br.com.nappa.model;
+package br.com.nappa.model.impl;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Selic implements IndiceEconomico{
+import br.com.nappa.model.IndiceEconomico;
+
+public class IndiceEconomicoDefault implements IndiceEconomico{
 	
 	private LocalDate date;
 	private BigDecimal taxaAoAno;
 	private BigDecimal fatorDiario;
 
-	public Selic(LocalDate date, BigDecimal taxaAoAno, BigDecimal fatorDiario) {
+	public IndiceEconomicoDefault(LocalDate date, BigDecimal fatorDiario) {
 		super();
-		this.date = date;
-		this.taxaAoAno = taxaAoAno;
+		this.date = date;		
 		this.fatorDiario = fatorDiario;
 	}
 	
-	public Selic(String date, BigDecimal taxaAoAno, BigDecimal fatorDiario) {		
-		this(LocalDate.parse(date,DateTimeFormatter.ofPattern("dd/MM/yyyy")), taxaAoAno, fatorDiario);		
+	public IndiceEconomicoDefault(String date, BigDecimal fatorDiario) {		
+		this(LocalDate.parse(date,DateTimeFormatter.ofPattern("dd/MM/yyyy")), fatorDiario);		
 	}
 
 	public LocalDate getDate() {

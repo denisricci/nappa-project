@@ -3,7 +3,7 @@ package br.com.nappa.logic.impl;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import br.com.nappa.enums.IndiceEconomicoEnum;
+import br.com.nappa.enums.TipoIndiceEconomicoEnum;
 import br.com.nappa.logic.Investimento;
 
 public class TesouroSelic extends Investimento{
@@ -21,8 +21,8 @@ public class TesouroSelic extends Investimento{
 	}
 
 	@Override
-	public IndiceEconomicoEnum getIndiceEconomico() {
-		return IndiceEconomicoEnum.SELIC;
+	public TipoIndiceEconomicoEnum getIndiceEconomico() {
+		return TipoIndiceEconomicoEnum.SELIC;
 	}
 
 }

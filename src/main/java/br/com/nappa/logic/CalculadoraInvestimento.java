@@ -5,6 +5,6 @@ import java.math.BigDecimal;
 public interface CalculadoraInvestimento {
 	
 	
-	BigDecimal calculaInvestimento(Investimento investimento);
+	BigDecimal calculaInvestimento(Investimento investimento, IndiceEconomicoHistory indiceEconomicoHistory) throws Exception;
 	
 }

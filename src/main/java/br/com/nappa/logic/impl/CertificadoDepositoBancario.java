@@ -3,7 +3,7 @@ package br.com.nappa.logic.impl;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import br.com.nappa.enums.IndiceEconomicoEnum;
+import br.com.nappa.enums.TipoIndiceEconomicoEnum;
 import br.com.nappa.logic.Investimento;
 import br.com.nappa.utils.CalculadoraUtils;
 
@@ -23,8 +23,8 @@ public class CertificadoDepositoBancario extends Investimento {
 	}
 
 	@Override
-	public IndiceEconomicoEnum getIndiceEconomico() {
-		return IndiceEconomicoEnum.CDI;
+	public TipoIndiceEconomicoEnum getIndiceEconomico() {
+		return TipoIndiceEconomicoEnum.CDI;
 	}		
 
 }
