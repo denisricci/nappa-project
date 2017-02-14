@@ -12,14 +12,14 @@ import br.com.nappa.model.IndiceEconomico;
 public class CalculadoraInvestimentoDefault implements CalculadoraInvestimento {
 
 	@Override
-	public BigDecimal calculaInvestimento(Investimento investimento) {
-		IndiceEconomicoHistory history = new IndiceEconomicoHistoryDefault();
+	public BigDecimal calculaInvestimento(Investimento investimento, IndiceEconomicoHistory indiceEconomicoHistory) throws Exception {		
 		
 		int cont = 0;
 		LocalDate currentDate = investimento.getDataInicial();
 		BigDecimal valor = investimento.getValor();
+		indiceEconomicoHistory.loadIndice(investimento.getIndiceEconomico());
 		do {			
-			Optional<IndiceEconomico> indiceEconomico = history.getIndicePorData(currentDate, investimento.getIndiceEconomico());						
+			Optional<IndiceEconomico> indiceEconomico = indiceEconomicoHistory.getIndicePorData(currentDate);						
 			if (indiceEconomico.isPresent()) {
 //				System.out.println(indiceEconomico.get().getDate() + "(" + indiceEconomico.get().getDate().getDayOfWeek() +")" + " " + indiceEconomico.get().getFatorDiario());
 				valor = investimento.calculoDiario(valor, indiceEconomico.get().getFatorDiario());

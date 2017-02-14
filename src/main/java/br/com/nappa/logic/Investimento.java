@@ -3,7 +3,7 @@ package br.com.nappa.logic;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import br.com.nappa.enums.IndiceEconomicoEnum;
+import br.com.nappa.enums.TipoIndiceEconomicoEnum;
 
 public abstract class Investimento {
 
@@ -32,5 +32,5 @@ public abstract class Investimento {
 		return dataFinal;
 	}
 	
-	public abstract IndiceEconomicoEnum getIndiceEconomico();
+	public abstract TipoIndiceEconomicoEnum getIndiceEconomico();
 }

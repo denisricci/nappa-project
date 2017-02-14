@@ -9,15 +9,19 @@ import org.junit.Test;
 import br.com.nappa.logic.CalculadoraInvestimento;
 import br.com.nappa.logic.impl.CalculadoraInvestimentoDefault;
 import br.com.nappa.logic.impl.CertificadoDepositoBancario;
+import br.com.nappa.logic.impl.IndiceEconomicoHistoryBCB;
 
 public class CertificadoDepositoBancarioTest {
 	
 	@Test
-	public void deveCalcularCorretamenteValorDoCDB(){
+	public void deveCalcularCorretamenteValorDoCDB() throws Exception{
+		
+		IndiceEconomicoHistory CdiHistory = new IndiceEconomicoHistoryBCB(LocalDate.of(2015, 7, 13), LocalDate.of(2017, 1, 1));
+		
 		CertificadoDepositoBancario cdb = new CertificadoDepositoBancario(new BigDecimal(50000),
 				LocalDate.of(2015, 7, 13), LocalDate.of(2017, 1, 1), new BigDecimal(0.95d));
 		CalculadoraInvestimento calculadora = new CalculadoraInvestimentoDefault();
-		BigDecimal valorFinal = calculadora.calculaInvestimento(cdb);		
+		BigDecimal valorFinal = calculadora.calculaInvestimento(cdb, CdiHistory);		
 		Assert.assertEquals(60104.82d, valorFinal.doubleValue(), 0.01d);
 	}
 
