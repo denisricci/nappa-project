@@ -1,10 +1,9 @@
 package br.com.nappa.logic;
 
-import java.math.BigDecimal;
+import br.com.nappa.model.DetatalhesRendimento;
 
 public interface CalculadoraInvestimento {
 	
-	
-	BigDecimal calculaInvestimento(Investimento investimento, IndiceEconomicoHistory indiceEconomicoHistory) throws Exception;
+	DetatalhesRendimento calculaInvestimento(Investimento investimento, IndiceEconomicoHistory indiceEconomicoHistory) throws Exception;
 	
 }

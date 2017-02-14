@@ -4,7 +4,9 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import br.com.nappa.enums.TipoIndiceEconomicoEnum;
 import br.com.nappa.logic.Investimento;
+import br.com.nappa.model.DetatalhesRendimento;
 import br.com.nappa.utils.CalculadoraUtils;
+import br.com.nappa.utils.ImpostoDeRendaUtils;
 
 public class CertificadoDepositoBancario extends Investimento {
 
@@ -17,13 +19,17 @@ public class CertificadoDepositoBancario extends Investimento {
 	}
 
 	@Override
-	public BigDecimal calculoDiario(BigDecimal currentAmount, BigDecimal fatorDiario) {		
-		return currentAmount.multiply(CalculadoraUtils.porcentagemDo(fatorDiario, porcentagemCDI));
+	public void calculoDiario(BigDecimal fatorDiario) {		
+		this.currentAmount = currentAmount.multiply(CalculadoraUtils.porcentagemDo(fatorDiario, porcentagemCDI));
 	}
 
 	@Override
 	public TipoIndiceEconomicoEnum getIndiceEconomico() {
 		return TipoIndiceEconomicoEnum.CDI;
-	}		
+	}
 
+	@Override
+	public DetatalhesRendimento detalhesRendimento() {
+		return new DetatalhesRendimento(valorLiquido, currentAmount, ImpostoDeRendaUtils.calcularImposto(getDataInicial(), getDataFinal(), currentAmount));
+	}
 }

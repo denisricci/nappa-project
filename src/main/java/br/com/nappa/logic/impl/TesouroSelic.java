@@ -5,6 +5,7 @@ import java.time.LocalDate;
 
 import br.com.nappa.enums.TipoIndiceEconomicoEnum;
 import br.com.nappa.logic.Investimento;
+import br.com.nappa.model.DetatalhesRendimento;
 
 public class TesouroSelic extends Investimento{
 	
@@ -23,6 +24,12 @@ public class TesouroSelic extends Investimento{
 	@Override
 	public TipoIndiceEconomicoEnum getIndiceEconomico() {
 		return TipoIndiceEconomicoEnum.SELIC;
+	}
+
+	@Override
+	public DetatalhesRendimento detalhesRendimento() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

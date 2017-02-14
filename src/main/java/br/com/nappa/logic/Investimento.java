@@ -4,26 +4,26 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import br.com.nappa.enums.TipoIndiceEconomicoEnum;
+import br.com.nappa.model.DetatalhesRendimento;
 
 public abstract class Investimento {
 
-	private BigDecimal valor;
+	private BigDecimal valorInicial;
 	private LocalDate dataInicial;
 	private LocalDate dataFinal;
+	protected BigDecimal currentAmount;
 	
-	public Investimento(BigDecimal valor, LocalDate dataInicial, LocalDate dataFinal) {
+	public Investimento(BigDecimal valorInicial, LocalDate dataInicial, LocalDate dataFinal) {
 		super();
-		this.valor = valor;
+		this.valorInicial = valorInicial;
 		this.dataInicial = dataInicial;
 		this.dataFinal = dataFinal;
 	}		
 
-	public abstract BigDecimal calculoDiario(BigDecimal currentAmount, BigDecimal fatorDiario);
-
-	public BigDecimal getValor() {
-		return valor;
-	}
-
+	public abstract void calculoDiario(BigDecimal fatorDiario);
+	public abstract TipoIndiceEconomicoEnum getIndiceEconomico();
+	public abstract DetatalhesRendimento detalhesRendimento();
+	
 	public LocalDate getDataInicial() {
 		return dataInicial;
 	}
@@ -31,6 +31,8 @@ public abstract class Investimento {
 	public LocalDate getDataFinal() {
 		return dataFinal;
 	}
-	
-	public abstract TipoIndiceEconomicoEnum getIndiceEconomico();
+
+	public BigDecimal getValorInicial() {
+		return valorInicial;
+	}
 }

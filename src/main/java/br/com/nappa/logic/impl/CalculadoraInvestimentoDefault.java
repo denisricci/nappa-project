@@ -7,27 +7,24 @@ import java.util.Optional;
 import br.com.nappa.logic.CalculadoraInvestimento;
 import br.com.nappa.logic.IndiceEconomicoHistory;
 import br.com.nappa.logic.Investimento;
+import br.com.nappa.model.DetatalhesRendimento;
 import br.com.nappa.model.IndiceEconomico;
 
 public class CalculadoraInvestimentoDefault implements CalculadoraInvestimento {
 
 	@Override
-	public BigDecimal calculaInvestimento(Investimento investimento, IndiceEconomicoHistory indiceEconomicoHistory) throws Exception {		
-		
-		int cont = 0;
+	public DetatalhesRendimento calculaInvestimento(Investimento investimento,
+			IndiceEconomicoHistory indiceEconomicoHistory) throws Exception {
+		DetatalhesRendimento detatalhesInvestimento = new DetatalhesRendimento();
 		LocalDate currentDate = investimento.getDataInicial();
-		BigDecimal valor = investimento.getValor();
 		indiceEconomicoHistory.loadIndice(investimento.getIndiceEconomico());
-		do {			
-			Optional<IndiceEconomico> indiceEconomico = indiceEconomicoHistory.getIndicePorData(currentDate);						
+		do {
+			Optional<IndiceEconomico> indiceEconomico = indiceEconomicoHistory.getIndicePorData(currentDate);
 			if (indiceEconomico.isPresent()) {
-//				System.out.println(indiceEconomico.get().getDate() + "(" + indiceEconomico.get().getDate().getDayOfWeek() +")" + " " + indiceEconomico.get().getFatorDiario());
-				valor = investimento.calculoDiario(valor, indiceEconomico.get().getFatorDiario());
-//				cont++;
+				investimento.calculoDiario(indiceEconomico.get().getFatorDiario());
 			}
 			currentDate = currentDate.plusDays(1);
 		} while ((!currentDate.isAfter(investimento.getDataFinal())));
-//		System.out.println(cont);
-		return valor;
+		return detatalhesInvestimento;
 	}
 }
