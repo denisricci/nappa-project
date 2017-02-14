@@ -27,7 +27,7 @@ public class CalculadoraInvestimentoDefault implements CalculadoraInvestimento {
 			}
 			currentDate = currentDate.plusDays(1);
 		} while ((!currentDate.isAfter(investimento.getDataFinal())));
-		System.out.println(cont);
+//		System.out.println(cont);
 		return valor;
 	}
 }

@@ -1,4 +1,4 @@
-package br.com.nappa.logic;
+package br.com.nappa.logic.impl;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import org.junit.Assert;
 import org.junit.Test;
 
+import br.com.nappa.logic.CalculadoraInvestimento;
 import br.com.nappa.logic.impl.CalculadoraInvestimentoDefault;
 import br.com.nappa.logic.impl.CertificadoDepositoBancario;
 
