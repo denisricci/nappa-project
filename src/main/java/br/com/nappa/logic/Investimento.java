@@ -15,6 +15,7 @@ public abstract class Investimento {
 	
 	public Investimento(BigDecimal valorInicial, LocalDate dataInicial, LocalDate dataFinal) {
 		super();
+		currentAmount=valorInicial;
 		this.valorInicial = valorInicial;
 		this.dataInicial = dataInicial;
 		this.dataFinal = dataFinal;

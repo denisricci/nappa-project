@@ -30,6 +30,7 @@ public class CertificadoDepositoBancario extends Investimento {
 
 	@Override
 	public DetatalhesRendimento detalhesRendimento() {
-		return new DetatalhesRendimento(valorLiquido, currentAmount, ImpostoDeRendaUtils.calcularImposto(getDataInicial(), getDataFinal(), currentAmount));
+		BigDecimal IR = ImpostoDeRendaUtils.calcularImposto(getDataInicial(), getDataFinal(), currentAmount.subtract(getValorInicial()));
+		return new DetatalhesRendimento(currentAmount.subtract(IR), currentAmount, IR);
 	}
 }

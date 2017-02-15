@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public class DetatalhesRendimento {
 
-	private BigDecimal valorLiquido;
+	private BigDecimal valorLiquido;	
 	private BigDecimal valorBruto;
 	private BigDecimal impostoDeRenda;
 	private BigDecimal taxasAdministrativas;
@@ -58,5 +58,11 @@ public class DetatalhesRendimento {
 
 	public void setTaxasAdministrativas(BigDecimal taxasAdministrativas) {
 		this.taxasAdministrativas = taxasAdministrativas;
+	}
+	
+	@Override
+	public String toString() {
+		return "DetatalhesRendimento [valorLiquido=" + valorLiquido + ", valorBruto=" + valorBruto + ", impostoDeRenda="
+				+ impostoDeRenda + ", taxasAdministrativas=" + taxasAdministrativas + "]";
 	}
 }

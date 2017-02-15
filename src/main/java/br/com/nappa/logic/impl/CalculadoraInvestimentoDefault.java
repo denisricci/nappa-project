@@ -1,6 +1,5 @@
 package br.com.nappa.logic.impl;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Optional;
 
@@ -14,8 +13,7 @@ public class CalculadoraInvestimentoDefault implements CalculadoraInvestimento {
 
 	@Override
 	public DetatalhesRendimento calculaInvestimento(Investimento investimento,
-			IndiceEconomicoHistory indiceEconomicoHistory) throws Exception {
-		DetatalhesRendimento detatalhesInvestimento = new DetatalhesRendimento();
+			IndiceEconomicoHistory indiceEconomicoHistory) throws Exception {		
 		LocalDate currentDate = investimento.getDataInicial();
 		indiceEconomicoHistory.loadIndice(investimento.getIndiceEconomico());
 		do {
@@ -25,6 +23,6 @@ public class CalculadoraInvestimentoDefault implements CalculadoraInvestimento {
 			}
 			currentDate = currentDate.plusDays(1);
 		} while ((!currentDate.isAfter(investimento.getDataFinal())));
-		return detatalhesInvestimento;
+		return investimento.detalhesRendimento();
 	}
 }

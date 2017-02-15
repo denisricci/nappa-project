@@ -6,19 +6,20 @@ import java.time.LocalDate;
 import br.com.nappa.enums.TipoIndiceEconomicoEnum;
 import br.com.nappa.logic.Investimento;
 import br.com.nappa.model.DetatalhesRendimento;
+import br.com.nappa.utils.ImpostoDeRendaUtils;
 
-public class TesouroSelic extends Investimento{
-	
+public class TesouroSelic extends Investimento {
+
 	private BigDecimal taxaDaAdministradora;
 
 	public TesouroSelic(BigDecimal valor, LocalDate dataInicial, LocalDate dataFinal, BigDecimal taxaDaAdministradora) {
 		super(valor.subtract(valor.multiply(taxaDaAdministradora)), dataInicial, dataFinal);
-		this.taxaDaAdministradora=taxaDaAdministradora;
+		this.taxaDaAdministradora = taxaDaAdministradora;
 	}
 
 	@Override
-	public BigDecimal calculoDiario(BigDecimal currentAmount, BigDecimal fatorDiario) {
-		return currentAmount.multiply(fatorDiario);
+	public void calculoDiario(BigDecimal fatorDiario) {
+		currentAmount = currentAmount.multiply(fatorDiario);
 	}
 
 	@Override
@@ -28,8 +29,9 @@ public class TesouroSelic extends Investimento{
 
 	@Override
 	public DetatalhesRendimento detalhesRendimento() {
-		// TODO Auto-generated method stub
-		return null;
+		BigDecimal IR = ImpostoDeRendaUtils.calcularImposto(getDataInicial(), getDataFinal(),
+				currentAmount.subtract(getValorInicial()));
+		return new DetatalhesRendimento(currentAmount.subtract(IR), currentAmount, IR);
 	}
 
 }
