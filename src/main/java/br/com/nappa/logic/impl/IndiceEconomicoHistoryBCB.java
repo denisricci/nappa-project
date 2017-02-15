@@ -44,7 +44,13 @@ public class IndiceEconomicoHistoryBCB implements IndiceEconomicoHistory {
 	@Override
 	public Optional<IndiceEconomico> getIndicePorData(LocalDate date) {
 		IndiceEconomicoFinder<IndiceEconomico> finder = new IndiceEconomicoFinderDefault<IndiceEconomico>(indices);
-		return finder.getIndicePorData(date);
+
+		LocalDate today = LocalDate.now();
+		if (date.isBefore(today)) {
+			return finder.getIndicePorData(date);
+		}
+
+		return finder.getIndicePorData(today.minusDays(1));
 	}
 
 	public void loadIndice(TipoIndiceEconomicoEnum indice) throws RemoteException {
@@ -53,7 +59,8 @@ public class IndiceEconomicoHistoryBCB implements IndiceEconomicoHistory {
 		for (WSSerieVO valor : valoresSeriesVO) {
 			for (WSValorSerieVO valorSerie : valor.getValores()) {
 				LocalDate date = LocalDate.of(valorSerie.getAno(), valorSerie.getMes(), valorSerie.getDia());
-				BigDecimal fatorDiario = new BigDecimal(valorSerie.getSvalor()).divide(BigDecimal.valueOf(100)).add(BigDecimal.ONE);
+				BigDecimal fatorDiario = new BigDecimal(valorSerie.getSvalor()).divide(BigDecimal.valueOf(100))
+						.add(BigDecimal.ONE);
 				IndiceEconomico indiceEconomico = new IndiceEconomicoDefault(date, fatorDiario);
 				indices.add(indiceEconomico);
 			}

@@ -19,14 +19,16 @@ import br.com.nappa.model.DetatalhesRendimento;
 public class App {
 
 	public static void main(String[] args) throws Exception {
-		IndiceEconomicoHistory CdiHistory = new IndiceEconomicoHistoryBCB(LocalDate.of(2015, 7, 13), LocalDate.now());		
-		CertificadoDepositoBancario cdb = new CertificadoDepositoBancario(new BigDecimal(50000),
-				LocalDate.of(2015, 7, 13), LocalDate.now(), new BigDecimal(0.95d));
+		
+		IndiceEconomicoHistory CdiHistory = new IndiceEconomicoHistoryBCB(LocalDate.now().minusDays(1), LocalDate.of(2018,12,5));		
+		
+		CertificadoDepositoBancario cdb = new CertificadoDepositoBancario(new BigDecimal(20000),
+				 LocalDate.now().minusDays(1), LocalDate.of(2018,12,5), new BigDecimal(1.18d));
 		CalculadoraInvestimento calculadora = new CalculadoraInvestimentoDefault();
 		DetatalhesRendimento detalhes = calculadora.calculaInvestimento(cdb, CdiHistory);
-		System.out.println(detalhes.getImpostoDeRenda());
-		System.out.println(detalhes.getValorBruto());
-		System.out.println(detalhes.getValorLiquido());
+		System.out.println("IR:" + detalhes.getImpostoDeRenda());
+		System.out.println("Bruto:" + detalhes.getValorBruto());
+		System.out.println("Liquido:" +  detalhes.getValorLiquido());
 		
 //		IndiceEconomicoHistory selicHistory = new IndiceEconomicoHistoryBCB(LocalDate.of(2015, 7, 13), LocalDate.now());
 //		Investimento tesouroSelic = new TesouroSelic(new BigDecimal(19963.72), LocalDate.of(2016, 2, 18),
