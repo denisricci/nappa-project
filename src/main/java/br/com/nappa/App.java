@@ -5,11 +5,9 @@ import java.time.LocalDate;
 
 import br.com.nappa.logic.CalculadoraInvestimento;
 import br.com.nappa.logic.IndiceEconomicoHistory;
-import br.com.nappa.logic.Investimento;
 import br.com.nappa.logic.impl.CalculadoraInvestimentoDefault;
 import br.com.nappa.logic.impl.CertificadoDepositoBancario;
 import br.com.nappa.logic.impl.IndiceEconomicoHistoryBCB;
-import br.com.nappa.logic.impl.TesouroSelic;
 import br.com.nappa.model.DetatalhesRendimento;
 
 /**
@@ -20,10 +18,10 @@ public class App {
 
 	public static void main(String[] args) throws Exception {
 		
-		IndiceEconomicoHistory CdiHistory = new IndiceEconomicoHistoryBCB(LocalDate.now().minusDays(1), LocalDate.of(2018,12,5));		
+		IndiceEconomicoHistory CdiHistory = new IndiceEconomicoHistoryBCB(LocalDate.now(), LocalDate.of(2018,12,5));		
 		
 		CertificadoDepositoBancario cdb = new CertificadoDepositoBancario(new BigDecimal(20000),
-				 LocalDate.now().minusDays(1), LocalDate.of(2018,12,5), new BigDecimal(1.18d));
+				 LocalDate.now(), LocalDate.of(2018,12,5), new BigDecimal(1.18d));
 		CalculadoraInvestimento calculadora = new CalculadoraInvestimentoDefault();
 		DetatalhesRendimento detalhes = calculadora.calculaInvestimento(cdb, CdiHistory);
 		System.out.println("IR:" + detalhes.getImpostoDeRenda());

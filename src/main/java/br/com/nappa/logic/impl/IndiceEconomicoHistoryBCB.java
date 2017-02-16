@@ -22,8 +22,8 @@ import br.gov.bcb.www3.wssgs.services.FachadaWSSGS.FachadaWSSGSProxy;
 
 public class IndiceEconomicoHistoryBCB implements IndiceEconomicoHistory {
 
-	private LocalDate dtInicio;
-	private LocalDate dtFim;
+	private LocalDate dtInicio = LocalDate.now().minusDays(1);
+	private LocalDate dtFim = LocalDate.now().minusDays(1);	
 	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 	Map<TipoIndiceEconomicoEnum, Long> series = new HashMap<>();
@@ -37,8 +37,13 @@ public class IndiceEconomicoHistoryBCB implements IndiceEconomicoHistory {
 	List<IndiceEconomico> indices = new ArrayList<>();
 
 	public IndiceEconomicoHistoryBCB(LocalDate dtInicio, LocalDate dtFim) {
-		this.dtInicio = dtInicio;
-		this.dtFim = dtFim;
+		if (dtInicio.isBefore(LocalDate.now())) {
+			this.dtInicio = dtInicio;
+		}
+
+		if (dtFim.isBefore(LocalDate.now())) {
+			this.dtFim = dtFim;
+		}
 	}
 
 	@Override
