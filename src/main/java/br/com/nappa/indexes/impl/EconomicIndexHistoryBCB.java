@@ -1,4 +1,4 @@
-package br.com.nappa.logic.impl;
+package br.com.nappa.indexes.impl;
 
 import java.math.BigDecimal;
 import java.rmi.RemoteException;
@@ -10,33 +10,32 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import br.com.nappa.data.IndiceEconomicoFinder;
-import br.com.nappa.data.impl.IndiceEconomicoFinderDefault;
-import br.com.nappa.enums.TipoIndiceEconomicoEnum;
-import br.com.nappa.logic.IndiceEconomicoHistory;
+import br.com.nappa.indexes.EconomicIndexFinder;
+import br.com.nappa.indexes.EconimicIndex;
+import br.com.nappa.indexes.EconomicIndexHistory;
 import br.com.nappa.model.IndiceEconomico;
 import br.com.nappa.model.impl.IndiceEconomicoDefault;
 import br.gov.bcb.pec.sgs.casosdeuso.ws.comum.WSSerieVO;
 import br.gov.bcb.pec.sgs.casosdeuso.ws.comum.WSValorSerieVO;
 import br.gov.bcb.www3.wssgs.services.FachadaWSSGS.FachadaWSSGSProxy;
 
-public class IndiceEconomicoHistoryBCB implements IndiceEconomicoHistory {
+public class EconomicIndexHistoryBCB implements EconomicIndexHistory {
 
 	private LocalDate dtInicio = LocalDate.now().minusDays(1);
 	private LocalDate dtFim = LocalDate.now().minusDays(1);	
 	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-	Map<TipoIndiceEconomicoEnum, Long> series = new HashMap<>();
+	Map<EconimicIndex, Long> series = new HashMap<>();
 
 	{
-		series.put(TipoIndiceEconomicoEnum.SELIC, 11l);
-		series.put(TipoIndiceEconomicoEnum.CDI, 12l);
+		series.put(EconimicIndex.SELIC, 11l);
+		series.put(EconimicIndex.CDI, 12l);
 
 	}
 
 	List<IndiceEconomico> indices = new ArrayList<>();
 
-	public IndiceEconomicoHistoryBCB(LocalDate dtInicio, LocalDate dtFim) {
+	public EconomicIndexHistoryBCB(LocalDate dtInicio, LocalDate dtFim) {
 		if (dtInicio.isBefore(LocalDate.now())) {
 			this.dtInicio = dtInicio;
 		}
@@ -48,7 +47,7 @@ public class IndiceEconomicoHistoryBCB implements IndiceEconomicoHistory {
 
 	@Override
 	public Optional<IndiceEconomico> getIndicePorData(LocalDate date) {
-		IndiceEconomicoFinder<IndiceEconomico> finder = new IndiceEconomicoFinderDefault<IndiceEconomico>(indices);
+		EconomicIndexFinder<IndiceEconomico> finder = new EconomicIndexFinderDefault<IndiceEconomico>(indices);
 
 		LocalDate today = LocalDate.now();
 		if (date.isBefore(today)) {
@@ -58,7 +57,7 @@ public class IndiceEconomicoHistoryBCB implements IndiceEconomicoHistory {
 		return finder.getIndicePorData(today.minusDays(1));
 	}
 
-	public void loadIndice(TipoIndiceEconomicoEnum indice) throws RemoteException {
+	public void loadIndice(EconimicIndex indice) throws RemoteException {
 		WSSerieVO[] valoresSeriesVO = new FachadaWSSGSProxy().getFachadaWSSGS().getValoresSeriesVO(
 				new long[] { series.get(indice) }, dtInicio.format(formatter), dtFim.format(formatter));
 		for (WSSerieVO valor : valoresSeriesVO) {

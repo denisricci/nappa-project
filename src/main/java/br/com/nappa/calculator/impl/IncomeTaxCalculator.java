@@ -1,10 +1,12 @@
-package br.com.nappa.utils;
+package br.com.nappa.calculator.impl;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class ImpostoDeRendaUtils {
-	public static BigDecimal calcularImposto(LocalDate dtInicio, LocalDate dtFim, BigDecimal valor) {
+public class IncomeTaxCalculator {
+
+
+	public static BigDecimal calculateTax(LocalDate dtInicio, LocalDate dtFim, BigDecimal valor) {
 		long dias = dtFim.toEpochDay() - dtInicio.toEpochDay();
 
 		if (dias <= 180) {

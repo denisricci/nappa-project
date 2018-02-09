@@ -1,14 +1,14 @@
-package br.com.nappa.logic.impl;
+package br.com.nappa.investment.impl;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import br.com.nappa.enums.TipoIndiceEconomicoEnum;
-import br.com.nappa.logic.Investimento;
+import br.com.nappa.indexes.EconimicIndex;
+import br.com.nappa.investment.Investment;
 import br.com.nappa.model.DetatalhesRendimento;
-import br.com.nappa.utils.ImpostoDeRendaUtils;
+import br.com.nappa.calculator.impl.IncomeTaxCalculator;
 
-public class TesouroSelic extends Investimento {
+public class TesouroSelic extends Investment {
 
 	private BigDecimal taxaDaAdministradora;
 
@@ -23,13 +23,13 @@ public class TesouroSelic extends Investimento {
 	}
 
 	@Override
-	public TipoIndiceEconomicoEnum getIndiceEconomico() {
-		return TipoIndiceEconomicoEnum.SELIC;
+	public EconimicIndex getIndiceEconomico() {
+		return EconimicIndex.SELIC;
 	}
 
 	@Override
 	public DetatalhesRendimento detalhesRendimento() {
-		BigDecimal IR = ImpostoDeRendaUtils.calcularImposto(getDataInicial(), getDataFinal(),
+		BigDecimal IR = IncomeTaxCalculator.calculateTax(getDataInicial(), getDataFinal(),
 				currentAmount.subtract(getValorInicial()));
 		return new DetatalhesRendimento(currentAmount.subtract(IR), currentAmount, IR);
 	}
