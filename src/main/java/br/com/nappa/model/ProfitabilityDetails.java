@@ -2,25 +2,25 @@ package br.com.nappa.model;
 
 import java.math.BigDecimal;
 
-public class DetatalhesRendimento {
+public class ProfitabilityDetails {
 
 	private BigDecimal valorLiquido;	
 	private BigDecimal valorBruto;
 	private BigDecimal impostoDeRenda;
 	private BigDecimal taxasAdministrativas;
 
-	public DetatalhesRendimento() {
+	public ProfitabilityDetails() {
 	}
 
-	public DetatalhesRendimento(BigDecimal valorLiquido, BigDecimal valorBruto, BigDecimal impostoDeRenda) {
+	public ProfitabilityDetails(BigDecimal valorLiquido, BigDecimal valorBruto, BigDecimal impostoDeRenda) {
 		super();
 		this.valorLiquido = valorLiquido;
 		this.valorBruto = valorBruto;
 		this.impostoDeRenda = impostoDeRenda;
 	}
 
-	public DetatalhesRendimento(BigDecimal valorLiquido, BigDecimal valorBruto, BigDecimal impostoDeRenda,
-			BigDecimal taxasAdministrativas) {
+	public ProfitabilityDetails(BigDecimal valorLiquido, BigDecimal valorBruto, BigDecimal impostoDeRenda,
+															BigDecimal taxasAdministrativas) {
 		super();
 		this.valorLiquido = valorLiquido;
 		this.valorBruto = valorBruto;
@@ -62,7 +62,7 @@ public class DetatalhesRendimento {
 	
 	@Override
 	public String toString() {
-		return "DetatalhesRendimento [valorLiquido=" + valorLiquido + ", valorBruto=" + valorBruto + ", impostoDeRenda="
+		return "ProfitabilityDetails [valorLiquido=" + valorLiquido + ", valorBruto=" + valorBruto + ", impostoDeRenda="
 				+ impostoDeRenda + ", taxasAdministrativas=" + taxasAdministrativas + "]";
 	}
 }

@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import br.com.nappa.indexes.EconimicIndex;
-import br.com.nappa.model.DetatalhesRendimento;
+import br.com.nappa.model.ProfitabilityDetails;
 
 public abstract class Investment {
 
@@ -23,7 +23,7 @@ public abstract class Investment {
 
 	public abstract void calculoDiario(BigDecimal fatorDiario);
 	public abstract EconimicIndex getIndiceEconomico();
-	public abstract DetatalhesRendimento detalhesRendimento();
+	public abstract ProfitabilityDetails detalhesRendimento();
 	
 	public LocalDate getDataInicial() {
 		return dataInicial;

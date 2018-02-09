@@ -4,21 +4,21 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import br.com.nappa.model.IndiceEconomico;
+import br.com.nappa.model.EconomicIndex;
 
-public class IndiceEconomicoDefault implements IndiceEconomico{
+public class EconomicIndexDefault implements EconomicIndex {
 	
 	private LocalDate date;
 	private BigDecimal taxaAoAno;
 	private BigDecimal fatorDiario;
 
-	public IndiceEconomicoDefault(LocalDate date, BigDecimal fatorDiario) {
+	public EconomicIndexDefault(LocalDate date, BigDecimal fatorDiario) {
 		super();
 		this.date = date;		
 		this.fatorDiario = fatorDiario;
 	}
 	
-	public IndiceEconomicoDefault(String date, BigDecimal fatorDiario) {		
+	public EconomicIndexDefault(String date, BigDecimal fatorDiario) {
 		this(LocalDate.parse(date,DateTimeFormatter.ofPattern("dd/MM/yyyy")), fatorDiario);		
 	}
 

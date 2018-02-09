@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Optional;
 
 import br.com.nappa.indexes.EconomicIndexFinder;
-import br.com.nappa.model.IndiceEconomico;
+import br.com.nappa.model.EconomicIndex;
 
-public class EconomicIndexFinderDefault<E extends IndiceEconomico> implements EconomicIndexFinder<E> {
+public class EconomicIndexFinderDefault<E extends EconomicIndex> implements EconomicIndexFinder<E> {
 
 	private List<E> indices;
 

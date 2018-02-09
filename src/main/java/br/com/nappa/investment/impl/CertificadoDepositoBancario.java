@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import br.com.nappa.indexes.EconimicIndex;
 import br.com.nappa.investment.Investment;
-import br.com.nappa.model.DetatalhesRendimento;
+import br.com.nappa.model.ProfitabilityDetails;
 import br.com.nappa.calculator.impl.PercentageCalculator;
 import br.com.nappa.calculator.impl.IncomeTaxCalculator;
 
@@ -29,8 +29,8 @@ public class CertificadoDepositoBancario extends Investment {
 	}
 
 	@Override
-	public DetatalhesRendimento detalhesRendimento() {
+	public ProfitabilityDetails detalhesRendimento() {
 		BigDecimal IR = IncomeTaxCalculator.calculateTax(getDataInicial(), getDataFinal(), currentAmount.subtract(getValorInicial()));
-		return new DetatalhesRendimento(currentAmount.subtract(IR), currentAmount, IR);
+		return new ProfitabilityDetails(currentAmount.subtract(IR), currentAmount, IR);
 	}
 }

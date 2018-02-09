@@ -1,11 +1,10 @@
 package br.com.nappa.calculator;
 
 import br.com.nappa.investment.Investment;
-import br.com.nappa.indexes.EconomicIndexHistory;
-import br.com.nappa.model.DetatalhesRendimento;
+import br.com.nappa.model.ProfitabilityDetails;
 
 public interface InvestmentCalculator {
 	
-	DetatalhesRendimento calculaInvestimento(Investment investment, EconomicIndexHistory economicIndexHistory) throws Exception;
+	ProfitabilityDetails calculate(Investment investment) throws Exception;
 	
 }
